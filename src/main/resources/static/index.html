@@ -76,11 +76,13 @@
             <ul class="list-group" ng-repeat="commentaire in story.list">
                 <li class="list-group-item">{{commentaire.content}}</li>
             </ul>
-            <input type="text" placeholder="Laissez un petit commentaire" ng-model="com">
+            <input type="text" placeholder="Laissez un petit commentaire" ng-model="com" id="comment-{{$index}}">
+            <div><button type="button" class="btn btn-primary", ng-click="push(story.id,$index)">Comment</button></div>
             <hr>
         </ul>
 
-        <div class="row mep">
+        <!--
+        <div class="row">
             <ul class="list-group col-md-12" ng-repeat="story in stories">
                 <li class="list-group-item active">
                         <div class="input-group mb-3">
@@ -97,7 +99,7 @@
                 <hr>
             </ul>
         </div>
-
+        -->
 
     </div>
 
@@ -117,7 +119,6 @@
                 });
             }
 
-            $scope.fetchFeed();
             $scope.share = function () {
                     $http.post('/story', $scope.story).then(function () {
                         $scope.stories.unshift({content: $scope.story});
@@ -125,11 +126,17 @@
                     })
             }
 
-            $scope.push = function() {
-                $http.post('/comms', $scope.com).then(function(res) {
-
+            $scope.push = function(id, index) {
+                var content = document.getElementById('comment-' + index).value;
+                console.log(content);
+                $http.post('/comms/'+id, content).then(function() {
+                    $scope.com = '';
+                    //$scope.fetchFeed();
+                    $scope.stories[index].list.push({content:content});
+                   // window.location.reload();
                 })
             }
+            $scope.fetchFeed();
         }
     );
 </script>

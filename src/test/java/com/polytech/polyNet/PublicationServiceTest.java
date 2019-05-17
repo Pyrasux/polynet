@@ -1,5 +1,9 @@
 package com.polytech.polyNet;
 
+import com.polytech.polyNet.business.PublicationService;
+import com.polytech.polyNet.business.Story;
+import com.polytech.polyNet.config.AppConfig;
+import com.polytech.polyNet.repository.StoryRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.boot.SpringApplication;

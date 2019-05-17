@@ -1,4 +1,7 @@
-package com.polytech.polyNet;
+package com.polytech.polyNet.repository;
+
+import com.polytech.polyNet.business.Comms;
+import com.polytech.polyNet.business.Story;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -30,9 +33,10 @@ public class JdbcStoryRepository implements StoryRepository {
             // FOR EACH ROW IN DATA BASE
             while (resultSet.next()) {
                 // I GET THE CONTENT COLUMN
+                int id = resultSet.getInt("ID");
                 String content = resultSet.getString("CONTENT");
                 List<Comms> l = findAllComms(Integer.parseInt(resultSet.getString("ID")));
-                Story story = new Story(content, l);
+                Story story = new Story(id, content , l);
                 // I ADD THE STORY TO THE RESULT
                 results.add(story);
 
@@ -91,7 +95,7 @@ public class JdbcStoryRepository implements StoryRepository {
             //GET CONNECTION
             System.out.println(comment);
             Connection connection = dataSource.getConnection();
-            String sql = "INSERT INTO COMMENT(content,id_story) VALUES('" + comment.getContent() +"," + comment.getId_story() +"')";
+            String sql = "INSERT INTO COMMENT(content,id_story) VALUES('" + comment.getContent() +"','" + comment.getId_story() +"')";
             //EXECUTE QUERY
             connection.createStatement().execute(sql);
 

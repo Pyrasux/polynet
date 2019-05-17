@@ -1,8 +1,20 @@
-package com.polytech.polyNet;
+package com.polytech.polyNet.business;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "comment")
 
 public class Comms {
 
+    @Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
+
+    @Column(name = "content")
     private String content;
+
     private int id_story;
 
     public Comms(String content) {

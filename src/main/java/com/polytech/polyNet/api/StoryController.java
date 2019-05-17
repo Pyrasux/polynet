@@ -1,13 +1,12 @@
-package com.polytech.polyNet;
+package com.polytech.polyNet.api;
 
+import com.polytech.polyNet.business.Comms;
+import com.polytech.polyNet.business.PublicationService;
+import com.polytech.polyNet.business.Story;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-import static java.util.Arrays.asList;
 
 @RestController
 public class StoryController {
@@ -16,7 +15,7 @@ public class StoryController {
     PublicationService publicationService;
 
     @Autowired
-    FeedService FeedService;
+    com.polytech.polyNet.business.FeedService FeedService;
 
     @PostMapping("/story")
     public void share(@RequestBody String content){
@@ -33,9 +32,10 @@ public class StoryController {
         System.out.println(param1 + " " + param2);
     }
 
-    @PostMapping("/comms")
-        public void push (@RequestBody String content){
-            publicationService.push(new Comms(content));
+    @PostMapping("/comms/{id}")
+        public List<Story> push (@RequestBody String content,@PathVariable("id") int id_story){
+            publicationService.push(new Comms(content,id_story));
+            return FeedService.fetchAll();
         }
     }
 

@@ -1,4 +1,6 @@
-package com.polytech.polyNet;
+package com.polytech.polyNet.business;
+
+import com.polytech.polyNet.repository.StoryRepository;
 
 public class PublicationServiceImpl implements PublicationService {
 

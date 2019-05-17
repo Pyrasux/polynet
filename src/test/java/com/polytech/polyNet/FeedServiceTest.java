@@ -1,5 +1,10 @@
 package com.polytech.polyNet;
 
+import com.polytech.polyNet.business.FeedService;
+import com.polytech.polyNet.business.FeedServiceImpl;
+import com.polytech.polyNet.business.Story;
+import com.polytech.polyNet.repository.InMemoryStoryRepository;
+import com.polytech.polyNet.repository.StoryRepository;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.polytech.polyNet;
+package com.polytech.polyNet.business;
 
 public interface PublicationService {
 
